@@ -1,0 +1,137 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  badge?: string;
+  features?: string[];
+}
+
+const { title, description, image, href, badge, features = [] } = Astro.props;
+---
+
+<a href={href} class="product-card">
+  {badge && <span class="card-badge">{badge}</span>}
+  <div class="card-image-wrap">
+    <img src={image} alt={title} loading="lazy" />
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">{title}</h3>
+    <p class="card-desc">{description}</p>
+    {features.length > 0 && (
+      <ul class="card-features">
+        {features.map(f => <li>{f}</li>)}
+      </ul>
+    )}
+    <span class="card-link">Learn more &rarr;</span>
+  </div>
+</a>
+
+<style>
+  .product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+    color: var(--text-primary);
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    z-index: 2;
+  }
+
+  .card-image-wrap {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover .card-image-wrap img {
+    transform: scale(1.03);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card-features {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .card-features li {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent-hover);
+    border-radius: 999px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: gap 0.2s;
+  }
+
+  .product-card:hover .card-link {
+    color: var(--accent-hover);
+  }
+</style>

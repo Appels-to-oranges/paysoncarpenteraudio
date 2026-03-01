@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+---
+
+<BaseLayout title="Home" description="Chrome audio extensions and Max for Live devices by Payson Carpenter.">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <p class="section-label fade-in">Audio Tools & Extensions</p>
+      <h1 class="hero-title fade-in fade-in-delay-1">
+        Professional audio tools<br />for your <span class="gradient-text">browser & DAW</span>
+      </h1>
+      <p class="hero-desc fade-in fade-in-delay-2">
+        Chrome extensions for real-time audio processing and Max for Live devices
+        for Ableton. Built by Payson Carpenter.
+      </p>
+      <div class="hero-actions fade-in fade-in-delay-3">
+        <a href="/extensions" class="btn btn-primary">Browse Extensions</a>
+        <a href="/max-for-live" class="btn btn-outline">Max for Live</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Products</p>
+      <h2 class="section-title">Chrome Extensions</h2>
+      <p class="section-desc">
+        Real-time audio processing directly in your browser tabs. No external software needed.
+      </p>
+      <div class="products-grid">
+        <ProductCard
+          title="Chromepressor"
+          description="Dynamic range compression for any Chrome tab. Threshold, ratio, attack, release, and makeup gain with real-time metering."
+          image="/images/chromepressor/main.png"
+          href="/extensions/chromepressor"
+          badge="v1.1"
+          features={['Compressor', 'Auto-Threshold', 'Level Metering', 'Visualizer']}
+        />
+        <ProductCard
+          title="ChromeEQ"
+          description="6-band parametric equalizer for Chrome tab audio. Shape your sound with precision frequency, gain, and Q controls."
+          image="/images/chromeeq/screenshot.jpg"
+          href="/extensions/chromeeq"
+          badge="v1.0"
+          features={['6-Band EQ', 'Parametric', 'Level Meters', 'Per-Tab']}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- What sets us apart -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <p class="section-label">Why These Tools</p>
+      <h2 class="section-title">Built for creators</h2>
+      <p class="section-desc">
+        No bloated apps, no subscriptions. Lightweight tools that do exactly what you need.
+      </p>
+      <FeatureGrid features={[
+        { icon: '⚡', title: 'Real-Time Processing', description: 'Web Audio API powered processing with zero-latency tab audio capture.' },
+        { icon: '🎛️', title: 'Professional Controls', description: 'Studio-grade parameters like threshold, ratio, attack, release, Q, and frequency.' },
+        { icon: '📊', title: 'Visual Feedback', description: 'Input/output level meters and gain reduction visualizers for precise monitoring.' },
+        { icon: '💾', title: 'Persistent Settings', description: 'Your settings are saved and restored automatically between sessions.' },
+      ]} />
+    </div>
+  </section>
+
+  <!-- Max for Live teaser -->
+  <section class="section max-teaser">
+    <div class="container max-teaser-inner">
+      <div>
+        <p class="section-label">Coming Soon</p>
+        <h2 class="section-title">Max for Live Devices</h2>
+        <p class="section-desc">
+          Custom Max for Live devices for Ableton Live. Unique instruments and effects
+          designed for modern production workflows.
+        </p>
+        <a href="/max-for-live" class="btn btn-outline" style="margin-top: 1.5rem;">View Collection</a>
+      </div>
+      <div class="max-teaser-visual">
+        <div class="teaser-grid">
+          <div class="teaser-block"></div>
+          <div class="teaser-block"></div>
+          <div class="teaser-block"></div>
+          <div class="teaser-block"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 7rem 0 5rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 70% 10%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .max-teaser {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .max-teaser-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .teaser-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .teaser-block {
+    aspect-ratio: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: all 0.3s;
+  }
+
+  .teaser-block:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    background: var(--bg-card-hover);
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 5rem 0 3rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .max-teaser-inner { grid-template-columns: 1fr; }
+    .max-teaser-visual { display: none; }
+  }
+</style>

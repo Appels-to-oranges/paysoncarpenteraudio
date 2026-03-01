@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Max for Live" description="Custom Max for Live devices for Ableton Live by Payson Carpenter.">
+
+  <section class="hero-detail">
+    <div class="hero-detail-bg"></div>
+    <div class="container">
+      <p class="section-label">Ableton Live</p>
+      <h1 class="page-title">Max for Live <span class="gradient-text">Devices</span></h1>
+      <p class="page-desc">
+        Custom instruments, effects, and utilities built with Max for Live for Ableton Live.
+        Designed for modern production workflows.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="coming-soon-wrap">
+        <div class="coming-soon-icon">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="20" width="48" height="32" rx="4" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+            <circle cx="24" cy="36" r="8" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+            <circle cx="40" cy="36" r="8" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+            <line x1="24" y1="28" x2="24" y2="36" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+            <line x1="40" y1="28" x2="40" y2="36" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+            <rect x="12" y="12" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+            <rect x="44" y="12" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+          </svg>
+        </div>
+        <h2 class="coming-soon-title">Devices Coming Soon</h2>
+        <p class="coming-soon-desc">
+          Max for Live devices are currently in development. Check back for instruments,
+          audio effects, and MIDI utilities designed for Ableton Live 11+.
+        </p>
+        <div class="planned-grid">
+          <div class="planned-card">
+            <span class="planned-icon">🎹</span>
+            <h3>Instruments</h3>
+            <p>Synthesizers and samplers with unique sound design capabilities.</p>
+          </div>
+          <div class="planned-card">
+            <span class="planned-icon">🎛️</span>
+            <h3>Audio Effects</h3>
+            <p>Creative and utility effects for mixing and sound design.</p>
+          </div>
+          <div class="planned-card">
+            <span class="planned-icon">🎵</span>
+            <h3>MIDI Tools</h3>
+            <p>Generative sequencers, arpeggiators, and MIDI manipulation utilities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero-detail {
+    position: relative;
+    padding: 4rem 0 2rem;
+    overflow: hidden;
+  }
+
+  .hero-detail-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 50% 0%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .page-title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .page-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .coming-soon-wrap {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .coming-soon-icon {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .coming-soon-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .coming-soon-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .planned-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .planned-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: all 0.3s;
+  }
+
+  .planned-card:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .planned-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.75rem;
+  }
+
+  .planned-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .planned-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+---
+
+<BaseLayout title="Chrome Extensions" description="Real-time audio processing Chrome extensions by Payson Carpenter.">
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Chrome Web Store</p>
+      <h1 class="section-title">Chrome Extensions</h1>
+      <p class="section-desc">
+        Real-time audio processing for any Chrome tab. Built with the Web Audio API
+        and Chrome's tab capture for low-latency, high-quality sound shaping.
+      </p>
+
+      <div class="extensions-grid">
+        <ProductCard
+          title="Chromepressor"
+          description="Full-featured dynamic range compressor for Chrome tabs. Includes threshold, ratio, attack, release, makeup gain, auto-threshold presets, and real-time gain reduction visualizer."
+          image="/images/chromepressor/main.png"
+          href="/extensions/chromepressor"
+          badge="v1.1"
+          features={['Compressor', 'Auto-Threshold', 'Gain Reduction Visualizer', 'Settings Panel']}
+        />
+        <ProductCard
+          title="ChromeEQ"
+          description="6-band parametric graphic equalizer for Chrome tabs. Each band has independent frequency, gain, and Q controls. Includes master gain and input/output level metering."
+          image="/images/chromeeq/screenshot.jpg"
+          href="/extensions/chromeeq"
+          badge="v1.0"
+          features={['6-Band Parametric', 'Frequency / Gain / Q', 'Master Gain', 'Level Meters']}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-section">
+    <div class="container">
+      <p class="section-label">Under the Hood</p>
+      <h2 class="section-title">Architecture</h2>
+      <p class="section-desc" style="margin-bottom: 2rem;">
+        Both extensions share a clean Manifest V3 architecture designed for performance and reliability.
+      </p>
+      <div class="arch-grid">
+        <div class="arch-item">
+          <h3>Tab Capture</h3>
+          <p>Chrome's <code>tabCapture</code> API captures audio from the active tab without affecting other tabs or system audio.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Offscreen Document</h3>
+          <p>An offscreen document runs the Web Audio API processing chain, keeping the audio pipeline isolated and efficient.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Service Worker</h3>
+          <p>A background service worker coordinates tab capture, settings storage, and message routing between components.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Persistent Storage</h3>
+          <p>All settings are saved via <code>chrome.storage</code> and automatically restored when reopening the extension.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .extensions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .tech-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .arch-item {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s;
+  }
+
+  .arch-item:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+
+  .arch-item h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .arch-item p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .arch-item code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.15rem 0.4rem;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 4px;
+    color: var(--accent-hover);
+  }
+
+  @media (max-width: 768px) {
+    .extensions-grid { grid-template-columns: 1fr; }
+  }
+</style>

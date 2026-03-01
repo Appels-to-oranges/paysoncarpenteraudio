@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ChromeEQ" description="6-band parametric EQ Chrome extension for tab audio.">
+
+  <section class="hero-detail">
+    <div class="hero-detail-bg"></div>
+    <div class="container hero-detail-inner">
+      <div class="hero-detail-text">
+        <a href="/extensions" class="back-link">&larr; All Extensions</a>
+        <h1 class="detail-title">ChromeEQ</h1>
+        <p class="detail-version">Version 1.0 &middot; Chrome Extension</p>
+        <p class="detail-desc">
+          A 6-band parametric graphic equalizer for Chrome tabs. Shape the frequency response
+          of any tab audio with precise control over frequency, gain, and bandwidth.
+        </p>
+        <div class="detail-actions">
+          <a href="#features" class="btn btn-primary">View Features</a>
+          <a href="#bands" class="btn btn-outline">Default Bands</a>
+        </div>
+      </div>
+      <div class="hero-detail-image">
+        <img src="/images/chromeeq/screenshot.jpg" alt="ChromeEQ interface" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Precision EQ</h2>
+      <div class="features-list">
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🎛️</div>
+          <div>
+            <h3>6-Band Parametric EQ</h3>
+            <p>Six independent peaking filters, each with frequency (20 Hz – 20 kHz), gain (-12 to +12 dB), and Q (0.3 – 8) controls.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🔊</div>
+          <div>
+            <h3>Master Gain</h3>
+            <p>Global output gain from 0.25x to 2x. Compensate for boosts or cuts across your EQ curve.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">📊</div>
+          <div>
+            <h3>Input / Output Metering</h3>
+            <p>Real-time level readouts show input and output levels. Settings view includes a level-over-time chart.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🔄</div>
+          <div>
+            <h3>Reset to Flat</h3>
+            <p>One click resets all band gains to 0 dB for a clean starting point.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">💾</div>
+          <div>
+            <h3>Persistent Settings</h3>
+            <p>All band parameters and master gain are saved and restored between sessions via Chrome storage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bands-section" id="bands">
+    <div class="container">
+      <p class="section-label">Defaults</p>
+      <h2 class="section-title">Default Bands</h2>
+      <p class="section-desc" style="margin-bottom: 2rem;">
+        Six bands tuned to musical frequency ranges. All start flat at 0 dB gain with Q of 1.
+      </p>
+      <div class="bands-grid">
+        <div class="band-card">
+          <span class="band-num">1</span>
+          <span class="band-freq">80 Hz</span>
+          <span class="band-label">Sub Bass</span>
+        </div>
+        <div class="band-card">
+          <span class="band-num">2</span>
+          <span class="band-freq">250 Hz</span>
+          <span class="band-label">Low Mids</span>
+        </div>
+        <div class="band-card">
+          <span class="band-num">3</span>
+          <span class="band-freq">800 Hz</span>
+          <span class="band-label">Mids</span>
+        </div>
+        <div class="band-card">
+          <span class="band-num">4</span>
+          <span class="band-freq">2.5 kHz</span>
+          <span class="band-label">Upper Mids</span>
+        </div>
+        <div class="band-card">
+          <span class="band-num">5</span>
+          <span class="band-freq">8 kHz</span>
+          <span class="band-label">Presence</span>
+        </div>
+        <div class="band-card">
+          <span class="band-num">6</span>
+          <span class="band-freq">16 kHz</span>
+          <span class="band-label">Air</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-specs">
+    <div class="container">
+      <p class="section-label">Technical</p>
+      <h2 class="section-title">Specs</h2>
+      <div class="specs-grid">
+        <div class="spec">
+          <span class="spec-label">Platform</span>
+          <span class="spec-value">Chrome (Manifest V3)</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Audio Engine</span>
+          <span class="spec-value">Web Audio API — BiquadFilterNode (peaking)</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Signal Chain</span>
+          <span class="spec-value">Source → Analyser → 6× Biquad → Gain → Analyser → Output</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Bands</span>
+          <span class="spec-value">6 parametric peaking filters</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Frequency Range</span>
+          <span class="spec-value">20 Hz – 20 kHz</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Gain Range</span>
+          <span class="spec-value">-12 dB to +12 dB per band</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Q Range</span>
+          <span class="spec-value">0.3 – 8</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Master Gain</span>
+          <span class="spec-value">0.25x – 2x</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Permissions</span>
+          <span class="spec-value">offscreen, tabCapture, tabs, activeTab, storage</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero-detail {
+    position: relative;
+    padding: 4rem 0 3rem;
+    overflow: hidden;
+  }
+
+  .hero-detail-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 70% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-detail-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .detail-title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-version {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .detail-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .hero-detail-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero-detail-image img { width: 100%; height: auto; }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    max-width: 700px;
+  }
+
+  .feature-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s;
+  }
+
+  .feature-row:hover { border-color: rgba(6, 182, 212, 0.3); }
+
+  .feature-icon-wrap {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-sm);
+  }
+
+  .feature-row h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-row p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .bands-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .bands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .band-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .band-card:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .band-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-alt);
+    background: rgba(6, 182, 212, 0.1);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .band-freq {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .band-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  .tech-specs { border-top: 1px solid var(--border-subtle); }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 2rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .spec:last-child { border-bottom: none; }
+
+  .spec-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .spec-value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .hero-detail-inner { grid-template-columns: 1fr; }
+    .hero-detail-image { order: -1; }
+    .bands-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

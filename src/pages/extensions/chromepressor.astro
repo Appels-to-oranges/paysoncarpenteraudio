@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Chromepressor" description="Dynamic range compressor Chrome extension for tab audio.">
+
+  <section class="hero-detail">
+    <div class="hero-detail-bg"></div>
+    <div class="container hero-detail-inner">
+      <div class="hero-detail-text">
+        <a href="/extensions" class="back-link">&larr; All Extensions</a>
+        <h1 class="detail-title">Chromepressor</h1>
+        <p class="detail-version">Version 1.1 &middot; Chrome Extension</p>
+        <p class="detail-desc">
+          A full-featured dynamic range compressor that processes audio directly in your Chrome tabs.
+          Tame loud audio, even out levels, and add punch — all from a lightweight browser extension.
+        </p>
+        <div class="detail-actions">
+          <a href="#features" class="btn btn-primary">View Features</a>
+          <a href="#screenshots" class="btn btn-outline">Screenshots</a>
+        </div>
+      </div>
+      <div class="hero-detail-image">
+        <img src="/images/chromepressor/main.png" alt="Chromepressor main interface" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Everything you need</h2>
+      <div class="features-list">
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🎚️</div>
+          <div>
+            <h3>Threshold & Gain</h3>
+            <p>Set the threshold from -100 to 0 dB. Makeup gain from 1x to 3x compensates for volume reduction.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">⚙️</div>
+          <div>
+            <h3>Full Compressor Controls</h3>
+            <p>Ratio (2:1 to 20:1), attack (0.001s to 0.1s), and release (0.01s to 1s) in the Settings panel for precise dynamics shaping.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🤖</div>
+          <div>
+            <h3>Auto-Threshold Presets</h3>
+            <p>Light (3 dB), Medium (6 dB), and Heavy (12 dB) presets measure your audio for 4 seconds and automatically set the threshold.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">📊</div>
+          <div>
+            <h3>Real-Time Visualizer</h3>
+            <p>Gain reduction and output level meters with a scrolling chart in the Settings view. Toggle traces on/off.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">💾</div>
+          <div>
+            <h3>Persistent Settings</h3>
+            <p>All parameters are saved to Chrome storage and restored automatically the next time you open the extension.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon-wrap">🔇</div>
+          <div>
+            <h3>Stop Capture</h3>
+            <p>Instantly stop tab capture and all processing with one click. Clean start every time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section screenshots-section" id="screenshots">
+    <div class="container">
+      <p class="section-label">Interface</p>
+      <h2 class="section-title">Screenshots</h2>
+      <div class="screenshots-grid">
+        <figure>
+          <img src="/images/chromepressor/main.png" alt="Main compressor view" loading="lazy" />
+          <figcaption>Main View — Threshold, gain, input level, gain reduction, auto presets</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/chromepressor/settings.png" alt="Settings and visualizer" loading="lazy" />
+          <figcaption>Settings — Ratio, attack, release, gain reduction chart</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/chromepressor/ui.png" alt="UI overview" loading="lazy" />
+          <figcaption>Full UI — Clean, minimal interface</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-specs">
+    <div class="container">
+      <p class="section-label">Technical</p>
+      <h2 class="section-title">Specs</h2>
+      <div class="specs-grid">
+        <div class="spec">
+          <span class="spec-label">Platform</span>
+          <span class="spec-value">Chrome (Manifest V3)</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Audio Engine</span>
+          <span class="spec-value">Web Audio API — DynamicsCompressorNode</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Capture Method</span>
+          <span class="spec-value">chrome.tabCapture + offscreen document</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Permissions</span>
+          <span class="spec-value">offscreen, tabCapture, tabs, activeTab, storage</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Threshold Range</span>
+          <span class="spec-value">-100 dB to 0 dB</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Ratio</span>
+          <span class="spec-value">2:1 to 20:1</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Attack</span>
+          <span class="spec-value">0.001s to 0.1s</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Release</span>
+          <span class="spec-value">0.01s to 1s</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">Makeup Gain</span>
+          <span class="spec-value">1x to 3x</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero-detail {
+    position: relative;
+    padding: 4rem 0 3rem;
+    overflow: hidden;
+  }
+
+  .hero-detail-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-detail-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .detail-title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-version {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .detail-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .hero-detail-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero-detail-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    max-width: 700px;
+  }
+
+  .feature-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s;
+  }
+
+  .feature-row:hover { border-color: rgba(139, 92, 246, 0.3); }
+
+  .feature-icon-wrap {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background: var(--accent-glow);
+    border-radius: var(--radius-sm);
+  }
+
+  .feature-row h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-row p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .screenshots-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .screenshots-grid figure {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .screenshots-grid img {
+    width: 100%;
+    height: auto;
+  }
+
+  .screenshots-grid figcaption {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .tech-specs { border-top: 1px solid var(--border-subtle); }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    margin-top: 2rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .spec:last-child { border-bottom: none; }
+
+  .spec-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .spec-value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .hero-detail-inner { grid-template-columns: 1fr; }
+    .hero-detail-image { order: -1; }
+    .screenshots-grid { grid-template-columns: 1fr; }
+    .specs-grid { grid-template-columns: 1fr; }
+  }
+</style>
