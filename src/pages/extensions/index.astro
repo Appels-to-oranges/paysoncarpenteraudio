@@ -93,7 +93,7 @@ import ProductCard from '../../components/ProductCard.astro';
   }
 
   .arch-item:hover {
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: var(--border-medium);
   }
 
   .arch-item h3 {
@@ -112,9 +112,9 @@ import ProductCard from '../../components/ProductCard.astro';
     font-family: var(--font-mono);
     font-size: 0.8rem;
     padding: 0.15rem 0.4rem;
-    background: rgba(139, 92, 246, 0.1);
+    background: var(--accent-soft);
     border-radius: 4px;
-    color: var(--accent-hover);
+    color: var(--text-primary);
   }
 
   @media (max-width: 768px) {

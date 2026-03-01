@@ -44,8 +44,8 @@ const { title, description, image, href, badge, features = [] } = Astro.props;
 
   .product-card:hover {
     transform: translateY(-4px);
-    border-color: var(--accent);
-    box-shadow: var(--shadow-glow);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-hover);
     color: var(--text-primary);
   }
 
@@ -58,7 +58,7 @@ const { title, description, image, href, badge, features = [] } = Astro.props;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    background: var(--accent);
+    background: var(--text-primary);
     color: #fff;
     border-radius: 999px;
     z-index: 2;
@@ -116,10 +116,10 @@ const { title, description, image, href, badge, features = [] } = Astro.props;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 0.25rem 0.6rem;
-    background: rgba(139, 92, 246, 0.1);
-    color: var(--accent-hover);
+    background: var(--accent-soft);
+    color: var(--text-primary);
     border-radius: 999px;
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    border: 1px solid var(--border-subtle);
   }
 
   .card-link {

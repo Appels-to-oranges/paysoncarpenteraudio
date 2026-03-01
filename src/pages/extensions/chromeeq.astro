@@ -16,13 +16,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           of any tab audio with precise control over frequency, gain, and bandwidth.
         </p>
         <div class="detail-actions">
-          <a href="#features" class="btn btn-primary">View Features</a>
+          <a href="#install" class="btn btn-primary">How to Install</a>
+          <a href="#features" class="btn btn-outline">Features</a>
           <a href="#bands" class="btn btn-outline">Default Bands</a>
         </div>
       </div>
       <div class="hero-detail-image">
         <img src="/images/chromeeq/screenshot.jpg" alt="ChromeEQ interface" />
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <div class="container">
+      <p class="section-label">Setup</p>
+      <h2 class="section-title">How to Install</h2>
+      <p class="section-desc" style="margin-bottom: 1.5rem;">
+        ChromeEQ is loaded as an unpacked extension. You need the extension folder containing manifest.json, icons, and scripts.
+      </p>
+      <ol class="install-steps">
+        <li>Obtain the ChromeEQ extension folder (with <code>manifest.json</code>, <code>background.js</code>, <code>popup.html</code>, <code>offscreen.html</code>, etc.).</li>
+        <li>Open Chrome and go to <code>chrome://extensions</code>.</li>
+        <li>Enable <strong>Developer mode</strong> (toggle in the top-right corner).</li>
+        <li>Click <strong>Load unpacked</strong> and select the ChromeEQ folder.</li>
+        <li>Ensure <code>icons/icon16.png</code>, <code>icon48.png</code>, and <code>icon128.png</code> exist (or copy from Chromepressor if needed).</li>
+        <li>Pin the extension and click it on any tab with audio to start EQ processing.</li>
+      </ol>
+      <p class="install-note">
+        <strong>Requirements:</strong> Chrome 109+ (Manifest V3). Same architecture as Chromepressor — tab capture, offscreen document, persistent storage.
+      </p>
     </div>
   </section>
 
@@ -66,6 +88,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <p>All band parameters and master gain are saved and restored between sessions via Chrome storage.</p>
           </div>
         </div>
+      </div>
+      <div class="use-cases">
+        <h3 class="use-cases-title">Use Cases</h3>
+        <ul>
+          <li><strong>Voice clarity</strong> — Boost presence (2–4 kHz) and cut mud (200–400 Hz) for calls and podcasts</li>
+          <li><strong>Bass adjustment</strong> — Add low-end on small speakers or reduce boom on headphones</li>
+          <li><strong>Treble shaping</strong> — Reduce harshness or add air and sparkle to dull sources</li>
+          <li><strong>Room correction</strong> — Compensate for poor speaker placement or room acoustics</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -169,7 +200,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .hero-detail-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 50% 60% at 70% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+    background: radial-gradient(ellipse 50% 60% at 70% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -215,6 +246,71 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .detail-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
+  .install-steps {
+    max-width: 600px;
+    margin: 0 0 1.5rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .install-steps li { margin-bottom: 0.75rem; }
+
+  .install-steps code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.15rem 0.4rem;
+    background: var(--accent-soft);
+    border-radius: 4px;
+    color: var(--text-primary);
+  }
+
+  .install-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .use-cases {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .use-cases-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .use-cases ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .use-cases li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .use-cases li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
   .hero-detail-image {
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -243,7 +339,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     transition: border-color 0.3s;
   }
 
-  .feature-row:hover { border-color: rgba(6, 182, 212, 0.3); }
+  .feature-row:hover { border-color: var(--border-medium); }
 
   .feature-icon-wrap {
     flex-shrink: 0;
@@ -253,7 +349,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    background: rgba(6, 182, 212, 0.1);
+    background: var(--accent-soft);
     border-radius: var(--radius-sm);
   }
 
@@ -294,7 +390,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   .band-card:hover {
-    border-color: rgba(6, 182, 212, 0.4);
+    border-color: var(--border-medium);
     transform: translateY(-2px);
   }
 
@@ -302,8 +398,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 700;
-    color: var(--accent-alt);
-    background: rgba(6, 182, 212, 0.1);
+    color: var(--text-primary);
+    background: var(--accent-soft);
     width: 24px;
     height: 24px;
     display: flex;

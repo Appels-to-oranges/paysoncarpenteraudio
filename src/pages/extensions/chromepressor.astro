@@ -16,13 +16,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           Tame loud audio, even out levels, and add punch — all from a lightweight browser extension.
         </p>
         <div class="detail-actions">
-          <a href="#features" class="btn btn-primary">View Features</a>
+          <a href="#install" class="btn btn-primary">How to Install</a>
+          <a href="#features" class="btn btn-outline">Features</a>
           <a href="#screenshots" class="btn btn-outline">Screenshots</a>
         </div>
+        <a href="https://github.com/Appels-to-oranges/Chromepressor" target="_blank" rel="noopener noreferrer" class="github-link">View on GitHub →</a>
       </div>
       <div class="hero-detail-image">
         <img src="/images/chromepressor/main.png" alt="Chromepressor main interface" />
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <div class="container">
+      <p class="section-label">Setup</p>
+      <h2 class="section-title">How to Install</h2>
+      <p class="section-desc" style="margin-bottom: 1.5rem;">
+        Chromepressor is distributed as an unpacked extension. Load it from the source folder in Chrome.
+      </p>
+      <ol class="install-steps">
+        <li>Clone or download the <a href="https://github.com/Appels-to-oranges/Chromepressor" target="_blank" rel="noopener noreferrer">Chromepressor repository</a> from GitHub.</li>
+        <li>Open Chrome and go to <code>chrome://extensions</code>.</li>
+        <li>Enable <strong>Developer mode</strong> (toggle in the top-right corner).</li>
+        <li>Click <strong>Load unpacked</strong> and select the Chromepressor folder containing <code>manifest.json</code>.</li>
+        <li>Pin the extension to your toolbar for quick access. Click the extension icon on any tab with audio to start processing.</li>
+      </ol>
+      <p class="install-note">
+        <strong>Requirements:</strong> Chrome 109+ (Manifest V3). Works with any tab that plays audio — YouTube, Spotify Web, podcasts, video calls, etc.
+      </p>
     </div>
   </section>
 
@@ -73,6 +95,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <p>Instantly stop tab capture and all processing with one click. Clean start every time.</p>
           </div>
         </div>
+      </div>
+      <div class="use-cases">
+        <h3 class="use-cases-title">Use Cases</h3>
+        <ul>
+          <li><strong>Streaming & video calls</strong> — Even out mic levels and tame loud participants</li>
+          <li><strong>Music listening</strong> — Add punch to compressed streaming audio</li>
+          <li><strong>Podcasts & audiobooks</strong> — Normalize volume across different speakers and segments</li>
+          <li><strong>Gaming</strong> — Reduce sudden loud sounds while keeping quiet details audible</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -155,7 +186,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .hero-detail-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 50% 60% at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+    background: radial-gradient(ellipse 50% 60% at 30% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -201,6 +232,41 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .detail-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
+  .github-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .github-link:hover { color: var(--text-primary); }
+
+  .install-steps {
+    max-width: 600px;
+    margin: 0 0 1.5rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .install-steps li { margin-bottom: 0.75rem; }
+
+  .install-steps code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.15rem 0.4rem;
+    background: var(--accent-soft);
+    border-radius: 4px;
+    color: var(--text-primary);
+  }
+
+  .install-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
   .hero-detail-image {
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -232,7 +298,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     transition: border-color 0.3s;
   }
 
-  .feature-row:hover { border-color: rgba(139, 92, 246, 0.3); }
+  .feature-row:hover { border-color: var(--border-medium); }
 
   .feature-icon-wrap {
     flex-shrink: 0;
@@ -242,7 +308,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    background: var(--accent-glow);
+    background: var(--accent-soft);
     border-radius: var(--radius-sm);
   }
 
@@ -256,6 +322,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     font-size: 0.875rem;
     color: var(--text-secondary);
     line-height: 1.6;
+  }
+
+  .use-cases {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .use-cases-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .use-cases ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .use-cases li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .use-cases li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
   }
 
   .screenshots-section {
