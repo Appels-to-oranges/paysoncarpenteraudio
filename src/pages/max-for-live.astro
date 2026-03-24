@@ -32,9 +32,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <h2 class="coming-soon-title">Devices Coming Soon</h2>
         <p class="coming-soon-desc">
-          Max for Live devices are currently in development. Check back for instruments,
-          audio effects, and MIDI utilities designed for Ableton Live 11+.
+          The first Max for Live device is now available, with more instruments,
+          audio effects, and MIDI utilities on the way.
         </p>
+        <div class="device-list">
+          <article class="device-card">
+            <div>
+              <p class="device-tag">First Release</p>
+              <h3>Harmonic Calculator</h3>
+              <p class="device-meta">Version 1.0.0 • March 12, 2026</p>
+              <p>
+                A Max for Live utility device for harmonic exploration and fast interval workflows in Ableton Live.
+              </p>
+            </div>
+            <a class="device-download" href="/max-for-live/Harmonic%20Calculator.amxd" download>Download .amxd</a>
+          </article>
+        </div>
         <div class="planned-grid">
           <div class="planned-card">
             <span class="planned-icon">🎹</span>
@@ -111,7 +124,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.7;
-    margin-bottom: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .device-list {
+    margin-bottom: 2rem;
+  }
+
+  .device-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-align: left;
+    background: var(--bg-card);
+  }
+
+  .device-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .device-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .device-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .device-meta {
+    font-size: 0.78rem !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 0.35rem;
+  }
+
+  .device-download {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.75rem;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .device-download:hover {
+    background: var(--accent-soft);
+    transform: translateY(-1px);
   }
 
   .planned-grid {

@@ -13,6 +13,7 @@ const year = new Date().getFullYear();
       <a href="/extensions">Extensions</a>
       <a href="/max-for-live">Max for Live</a>
     </div>
+    <a class="footer-support" href="https://ko-fi.com/paysoncarpenter" target="_blank" rel="noreferrer">Support on Ko-fi</a>
     <p class="footer-copy">&copy; {year} Payson Carpenter Audio. All rights reserved.</p>
   </div>
 </footer>
@@ -61,5 +62,17 @@ const year = new Date().getFullYear();
   .footer-copy {
     font-size: 0.8rem;
     color: var(--text-muted);
+  }
+
+  .footer-support {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .footer-support:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
   }
 </style>
