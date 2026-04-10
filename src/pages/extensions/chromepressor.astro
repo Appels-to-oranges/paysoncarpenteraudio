@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { extensionChromeWebStoreUrl } from '../../data/extensionStoreUrls';
+
+const webStoreUrl = extensionChromeWebStoreUrl.chromepressor;
 ---
 
 <BaseLayout title="Chromepressor" description="Dynamic range compressor Chrome extension for tab audio.">
@@ -16,7 +19,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           Tame loud audio, even out levels, and add punch — all from a lightweight browser extension.
         </p>
         <div class="detail-actions">
-          <a href="#install" class="btn btn-primary">How to Install</a>
+          <a href={webStoreUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+          <a href="#install" class="btn btn-outline">How to Install</a>
           <a href="#features" class="btn btn-outline">Features</a>
           <a href="#screenshots" class="btn btn-outline">Screenshots</a>
         </div>
@@ -32,8 +36,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container">
       <p class="section-label">Setup</p>
       <h2 class="section-title">How to Install</h2>
-      <p class="section-desc" style="margin-bottom: 1.5rem;">
-        Chromepressor is distributed as an unpacked extension. Load it from the source folder in Chrome.
+      <p class="section-desc install-lead">
+        The easiest way is to install from the <strong>Chrome Web Store</strong> — one click, and Chrome keeps the extension up to date automatically.
+      </p>
+      <div class="install-store-card">
+        <a href={webStoreUrl} class="btn btn-primary install-store-btn" target="_blank" rel="noopener noreferrer">Add to Chrome — Web Store</a>
+        <p class="install-store-hint">Opens the official listing in a new tab.</p>
+      </div>
+      <h3 class="install-advanced-title">Developers: load unpacked from GitHub</h3>
+      <p class="section-desc install-advanced-desc">
+        If you are working from source or prefer a local build, load the extension in developer mode.
       </p>
       <ol class="install-steps">
         <li>Clone or download the <a href="https://github.com/Appels-to-oranges/Chromepressor" target="_blank" rel="noopener noreferrer">Chromepressor repository</a> from GitHub.</li>

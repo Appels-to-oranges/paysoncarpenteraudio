@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { extensionChromeWebStoreUrl } from '../../data/extensionStoreUrls';
+
+const webStoreUrl = extensionChromeWebStoreUrl.chromeeq;
 ---
 
 <BaseLayout title="ChromeEQ" description="6-band parametric EQ Chrome extension for tab audio.">
@@ -16,13 +19,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           of any tab audio with precise control over frequency, gain, and bandwidth.
         </p>
         <div class="detail-actions">
-          <a href="#install" class="btn btn-primary">How to Install</a>
+          <a href={webStoreUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+          <a href="#install" class="btn btn-outline">How to Install</a>
           <a href="#features" class="btn btn-outline">Features</a>
+          <a href="#screenshots" class="btn btn-outline">Screenshots</a>
           <a href="#bands" class="btn btn-outline">Default Bands</a>
         </div>
       </div>
       <div class="hero-detail-image">
-        <img src="/images/chromeeq/screenshot.jpg" alt="ChromeEQ interface" />
+        <img src="/images/chromeeq/main.png" alt="ChromeEQ main EQ interface" />
       </div>
     </div>
   </section>
@@ -31,8 +36,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container">
       <p class="section-label">Setup</p>
       <h2 class="section-title">How to Install</h2>
-      <p class="section-desc" style="margin-bottom: 1.5rem;">
-        ChromeEQ is loaded as an unpacked extension. You need the extension folder containing manifest.json, icons, and scripts.
+      <p class="section-desc install-lead">
+        Install from the <strong>Chrome Web Store</strong> for the simplest setup — one click, with updates handled by Chrome.
+      </p>
+      <div class="install-store-card">
+        <a href={webStoreUrl} class="btn btn-primary install-store-btn" target="_blank" rel="noopener noreferrer">Add to Chrome — Web Store</a>
+        <p class="install-store-hint">Opens the official listing in a new tab.</p>
+      </div>
+      <h3 class="install-advanced-title">Developers: load unpacked</h3>
+      <p class="section-desc install-advanced-desc">
+        To run a local copy, use the extension folder that contains <code>manifest.json</code>, icons, and scripts.
       </p>
       <ol class="install-steps">
         <li>Obtain the ChromeEQ extension folder (with <code>manifest.json</code>, <code>background.js</code>, <code>popup.html</code>, <code>offscreen.html</code>, etc.).</li>
@@ -97,6 +110,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <li><strong>Treble shaping</strong> — Reduce harshness or add air and sparkle to dull sources</li>
           <li><strong>Room correction</strong> — Compensate for poor speaker placement or room acoustics</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section screenshots-section" id="screenshots">
+    <div class="container">
+      <p class="section-label">Interface</p>
+      <h2 class="section-title">Screenshots</h2>
+      <div class="screenshots-grid">
+        <figure>
+          <img src="/images/chromeeq/main.png" alt="ChromeEQ main view with six bands and meters" loading="lazy" />
+          <figcaption>Main view — six parametric bands, master gain, input and output levels</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/chromeeq/view-2.png" alt="ChromeEQ band controls" loading="lazy" />
+          <figcaption>Band controls — frequency, gain, and Q for each band</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/chromeeq/view-3.png" alt="ChromeEQ settings and metering" loading="lazy" />
+          <figcaption>Settings — level chart and extended metering</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -365,6 +399,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     line-height: 1.6;
   }
 
+  .screenshots-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .screenshots-grid figure {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .screenshots-grid img {
+    width: 100%;
+    height: auto;
+  }
+
+  .screenshots-grid figcaption {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
   .bands-section {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-subtle);
@@ -461,6 +525,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   @media (max-width: 768px) {
     .hero-detail-inner { grid-template-columns: 1fr; }
     .hero-detail-image { order: -1; }
+    .screenshots-grid { grid-template-columns: 1fr; }
     .bands-grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

@@ -143,6 +143,47 @@ img {
   transform: translateY(-1px);
 }
 
+.install-lead {
+  margin-bottom: 1rem !important;
+}
+
+.install-store-card {
+  max-width: 600px;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.install-store-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.install-store-hint {
+  margin-top: 0.65rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.install-advanced-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  max-width: 600px;
+}
+
+.install-advanced-desc {
+  margin-bottom: 1rem !important;
+  font-size: 1rem !important;
+}
+
 .divider {
   width: 100%;
   height: 1px;
