@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ChromeEQ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #2a2a2a;
+        --bg-dark: #2a2a2a;
+        --bg-panel: #2a2a2a;
+        --grid: rgba(255,255,255,0.06);
+        --text: #e0e0e0;
+        --text-dim: #9a9a9a;
+        --curve: rgba(255,255,255,0.35);
+        --spectrum-fill: rgba(100,120,140,0.5);
+        --point-red: #e06c6c;
+        --point-yellow: #e6c229;
+        --point-green: #6bc96b;
+        --point-cyan: #5eb9d6;
+        --point-purple: #b88fd9;
+        --point-white: #e8e8e8;
+      }
+      body { min-width: 420px; padding: 0; margin: 0; background: var(--bg); color: var(--text); font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+      .card { border: none; background: var(--bg); }
+      .card-header { color: var(--text); font-weight: 800; background: var(--bg); padding: 0.5rem 0.75rem; border-bottom: 1px solid transparent; }
+      #eq-canvas { display: block; width: 400px; height: 200px; max-width: 100%; box-sizing: border-box; background: var(--bg); cursor: crosshair; }
+      .gain-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.75rem; background: var(--bg); border-top: 1px solid transparent; }
+      .gain-label { font-size: 0.75rem; color: var(--text-dim); margin: 0; flex-shrink: 0; }
+      .gain-slider { flex: 1; min-width: 0; height: 6px; accent-color: var(--text-dim); }
+      .gain-value { font-size: 0.75rem; color: var(--text-dim); min-width: 3.5rem; text-align: right; }
+      .level-row { display: flex; align-items: center; justify-content: space-between; padding: 0.2rem 0.75rem; background: var(--bg); font-size: 0.7rem; color: var(--text-dim); }
+      .level-right { display: flex; align-items: center; gap: 0.25rem; }
+      .level-value { font-variant-numeric: tabular-nums; }
+      .clip-indicator { width: 8px; height: 8px; border-radius: 50%; background: #333; flex-shrink: 0; margin-left: 0.25rem; }
+      .clip-indicator.on { background: #e55; box-shadow: 0 0 6px #e55; }
+      .bypass-warning { padding: 0.5rem 0.75rem; margin: 0; background: rgba(180, 120, 60, 0.2); border: 1px solid rgba(200, 140, 80, 0.5); border-radius: 4px; margin-top: 0.35rem; }
+      .bypass-warning.hidden { display: none !important; }
+      .bypass-warning:not(.hidden) { display: block; }
+      .bypass-warning-text { margin: 0 0 0.4rem 0; font-size: 0.75rem; color: var(--text); }
+      .bypass-warning-dismiss { font-size: 0.7rem; }
+      .card-body { padding: 0.5rem 0.75rem 0.75rem; }
+      .btn-start { font-weight: 600; background: #4a7c4a; border-color: #4a7c4a; color: #fff; }
+      .btn-start:hover { background: #5a9c5a; border-color: #5a9c5a; color: #fff; }
+      .btn-stop { font-weight: 600; color: #c55; border-color: #c55; }
+      .btn-stop:hover { color: #e66; border-color: #e66; background: transparent; }
+      #bypass-btn.active { background: rgba(255,255,255,0.15); border-color: var(--text-dim); color: var(--text); }
+      .info-panel { background: var(--bg); padding: 0.35rem 0.5rem; font-size: 0.7rem; border-top: 1px solid transparent; border-bottom: 1px solid transparent; }
+      .info-row { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.25rem; }
+      .info-row:last-child { margin-bottom: 0; }
+      .info-head { color: var(--text-dim); font-weight: 600; margin-bottom: 0.2rem; }
+      .info-band { width: 2.25rem; flex-shrink: 0; color: var(--text-dim); }
+      .info-row:focus-within .info-band,
+      .info-row.band-active .info-band { color: #c4c4c4; }
+      .info-head .info-band { width: 2.25rem; }
+      .info-freq { width: 4rem; }
+      .info-gain { width: 3.5rem; }
+      .info-q { min-width: 2rem; }
+      .info-freq-input, .info-gain-input, .info-q-input {
+        width: 100%; box-sizing: border-box; padding: 0.15rem 0.25rem; font-size: 0.7rem;
+        background: var(--bg); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: var(--text);
+      }
+      .info-row .info-freq-input { width: 4rem; }
+      .info-row .info-gain-input { width: 3.5rem; }
+      .info-q-input { width: 2.5rem; }
+      .info-q-wrap { display: flex; align-items: center; gap: 0.25rem; flex: 1; min-width: 0; }
+      .info-q-dial { flex: 1; min-width: 2rem; height: 4px; accent-color: var(--text-dim); }
+      .chart-zoom-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+      .chart-zoom-row label { font-size: 0.8rem; color: var(--text-dim); margin: 0; flex-shrink: 0; }
+      .chart-zoom-select {
+        flex: 1; min-width: 0; padding: 0.25rem 0.5rem; font-size: 0.8rem;
+        background: var(--bg); border: 1px solid rgba(255,255,255,0.25); border-radius: 4px;
+        color: var(--text); cursor: pointer;
+      }
+      .chart-zoom-select:hover { border-color: rgba(255,255,255,0.4); }
+      .chart-zoom-select:focus { outline: none; border-color: var(--text-dim); }
+      #gain-matching-cb { accent-color: var(--text-dim); cursor: pointer; }
+      .view { display: block; }
+      .view.hidden { display: none !important; }
+      .settings-view .card-body { padding: 0.5rem 0.75rem 0.75rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid px-0">
+      <div class="card">
+        <div id="main-view" class="view">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span>ChromeEQ</span>
+            <img src="icons/icon128.png" alt="" width="32" height="32" style="opacity:0.9;">
+          </div>
+          <canvas id="eq-canvas" width="400" height="200" title="Drag nodes to move freq/gain. Hold Ctrl (or press while dragging) and move up/down to adjust Q."></canvas>
+          <div class="gain-row">
+            <label for="output-gain-slider" class="gain-label">Gain</label>
+            <input type="range" id="output-gain-slider" class="gain-slider" min="-40" max="20" step="0.1" value="0" title="Output gain -40 to +20 dB">
+            <span id="output-gain-value" class="gain-value">0 dB</span>
+          </div>
+          <div class="level-row">
+            <span class="level-label">Output</span>
+            <span class="level-right">
+              <span id="output-level-display" class="level-value">-- dB</span>
+              <span id="clip-indicator" class="clip-indicator" title="Clipping"></span>
+            </span>
+          </div>
+          <div id="bypass-warning" class="bypass-warning hidden">
+            <p class="bypass-warning-text">Bypassed signal may be significantly louder than the processed one. Adjust the output gain if needed.</p>
+            <button type="button" class="btn btn-sm btn-outline-secondary bypass-warning-dismiss">Dismiss</button>
+          </div>
+          <div class="info-panel">
+            <div class="info-row info-head">
+              <span class="info-band">Band</span>
+              <span class="info-freq">Freq (Hz)</span>
+              <span class="info-gain">Gain (dB)</span>
+              <span class="info-q">Q</span>
+            </div>
+            <div class="info-row" data-row="0">
+              <span class="info-band">1</span>
+              <input type="number" class="info-freq-input" min="20" max="20000" step="1" value="50">
+              <input type="number" class="info-gain-input" min="-20" max="20" step="0.5" value="0">
+              <div class="info-q-wrap">
+                <input type="number" class="info-q-input" min="0.3" max="10" step="0.1" value="1" title="Q">
+                <input type="range" class="info-q-dial" min="0.3" max="10" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="info-row" data-row="1">
+              <span class="info-band">2</span>
+              <input type="number" class="info-freq-input" min="20" max="20000" step="1" value="100">
+              <input type="number" class="info-gain-input" min="-20" max="20" step="0.5" value="0">
+              <div class="info-q-wrap">
+                <input type="number" class="info-q-input" min="0.3" max="10" step="0.1" value="1">
+                <input type="range" class="info-q-dial" min="0.3" max="10" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="info-row" data-row="2">
+              <span class="info-band">3</span>
+              <input type="number" class="info-freq-input" min="20" max="20000" step="1" value="200">
+              <input type="number" class="info-gain-input" min="-20" max="20" step="0.5" value="0">
+              <div class="info-q-wrap">
+                <input type="number" class="info-q-input" min="0.3" max="10" step="0.1" value="1">
+                <input type="range" class="info-q-dial" min="0.3" max="10" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="info-row" data-row="3">
+              <span class="info-band">4</span>
+              <input type="number" class="info-freq-input" min="20" max="20000" step="1" value="2000">
+              <input type="number" class="info-gain-input" min="-20" max="20" step="0.5" value="0">
+              <div class="info-q-wrap">
+                <input type="number" class="info-q-input" min="0.3" max="10" step="0.1" value="1">
+                <input type="range" class="info-q-dial" min="0.3" max="10" step="0.1" value="1">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex mb-2">
+              <button type="button" class="btn btn-outline-secondary btn-sm flex-grow-1 mr-2" id="bypass-btn" title="Bypass EQ (pass-through)">Bypass</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm flex-grow-1" id="reset-flat" title="Reset to 50, 100, 200, 2k Hz; 0 dB; Q 1">Reset to default</button>
+            </div>
+            <button type="button" class="btn btn-outline btn-stop btn-sm btn-block mt-2" id="stop-capture">Stop capture</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm btn-block mt-2" id="settings-btn">Settings</button>
+          </div>
+        </div>
+        <div id="settings-view" class="view hidden">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Settings</span>
+          </div>
+          <div class="card-body">
+            <div class="chart-zoom-row">
+              <label for="chart-zoom-select">Chart zoom</label>
+              <select id="chart-zoom-select" class="chart-zoom-select" title="Boost spectrum display (visual only). Helps see quiet signals.">
+                <option value="0">+0 dB (−60 to +20 dB)</option>
+                <option value="20" selected>+20 dB (−40 to +20 dB)</option>
+                <option value="40">+40 dB (−20 to +20 dB)</option>
+              </select>
+            </div>
+            <div class="chart-zoom-row">
+              <label for="slope-select">Slope</label>
+              <select id="slope-select" class="chart-zoom-select" title="Tilt spectrum display (visual only). dB per octave.">
+                <option value="0">0 dB/oct</option>
+                <option value="3" selected>+3 dB/oct</option>
+                <option value="4.5">+4.5 dB/oct</option>
+              </select>
+            </div>
+            <div class="chart-zoom-row">
+              <label for="smoothing-select">Smoothing</label>
+              <select id="smoothing-select" class="chart-zoom-select" title="Spectrum release time. Higher = peaks hold longer, slower fade to zero.">
+                <option value="0.3" selected>Fast (0.3)</option>
+                <option value="0.5">Default (0.5)</option>
+                <option value="0.8">Medium (0.8)</option>
+                <option value="0.95">Slow (0.95)</option>
+              </select>
+            </div>
+            <div class="chart-zoom-row">
+              <label for="resolution-select">Chart resolution</label>
+              <select id="resolution-select" class="chart-zoom-select" title="Higher = sharper lines, more spectrum bins. Reduces low-end blockiness.">
+                <option value="1">1× (64 Bins)</option>
+                <option value="2">2× (128 Bins)</option>
+                <option value="3">3× (256 Bins)</option>
+                <option value="4">4× (512 Bins)</option>
+                <option value="6" selected>6× (1024 Bins)</option>
+              </select>
+            </div>
+            <div class="chart-zoom-row d-flex align-items-center">
+              <label for="gain-matching-cb" class="mb-0">Gain matching</label>
+              <input type="checkbox" id="gain-matching-cb" class="ml-2" title="After releasing a band, auto-adjust output level to match input.">
+            </div>
+            <div class="chart-zoom-row d-flex align-items-center">
+              <label for="limiter-cb" class="mb-0">Limiter</label>
+              <input type="checkbox" id="limiter-cb" class="ml-2" checked title="Prevent clipping on the output.">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm btn-block mt-3" id="settings-save" style="background: #363636; border-color: #363636;">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script defer src="popup.js"></script>
+  </body>
+</html>
