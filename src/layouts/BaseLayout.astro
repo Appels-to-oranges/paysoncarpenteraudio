@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { title, description = 'Audio tools for Chrome and Ableton Live by Payson Carpenter.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -16,8 +17,17 @@ const { title, description = 'Audio tools for Chrome and Ableton Live by Payson 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <title>{title} | Payson Carpenter Audio</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={`${title} | Payson Carpenter Audio`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} | Payson Carpenter Audio`} />
+    <meta name="twitter:description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
   <body>
